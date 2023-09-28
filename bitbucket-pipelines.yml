@@ -69,7 +69,7 @@ pipelines:
             # Dentro de EC2: Ejecuta un nuevo contenedor con las images descargadas
             - docker create -p29429:5432 --name db_postgres_citas_cont --network mired -e POSTGRES_HOST_AUTH_METHOD=trust -e POSTGRES_DB=apis-citas -e POSTGRES_USER=losDepende -e POSTGRES_PASSWORD=12345  vhoyosa/db_postgrest_citas:$BITBUCKET_COMMIT
             - docker start db_postgres_citas_cont
-            - docker create -p8000:8000 --name proyecto_citas_cont --network mired -e DJANGO_SETTINGS_MODULE=config.settings.development -e RDS_USERNAME=losDepende -e RDS_PASSWORD=12345 -e RDS_DB_NAME=citas-apis -e PYTHONPATH=proyecto_citas -e PYTHONUSERBASE=/proyecto_citas/vendor -e SIFTSCIENCE_API_KEY=b8dffbb933d4e88a -e APP_ENVIRONMENT=development vhoyosa/proyectocitas:$BITBUCKET_COMMIT
+            - docker create -p8000:8000 --name proyecto_citas_cont --network mired -e DJANGO_SETTINGS_MODULE=config.settings.development -e RDS_USERNAME=losDepende -e RDS_PASSWORD=12345 -e RDS_DB_NAME=apis-citas -e PYTHONPATH=proyecto_citas -e PYTHONUSERBASE=/proyecto_citas/vendor -e SIFTSCIENCE_API_KEY=b8dffbb933d4e88a -e APP_ENVIRONMENT=development vhoyosa/proyectocitas:$BITBUCKET_COMMIT
             - docker start proyecto_citas_cont
             - docker ps -a
             # Sale de EC2
