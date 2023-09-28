@@ -1,0 +1,32 @@
+FROM python:3.8-buster
+RUN apt-get update
+RUN apt-get install --fix-missing --assume-yes build-essential libpq-dev tmux default-jre libfop-java libbatik-java graphviz libxml2-dev libxmlsec1-dev libxmlsec1-openssl
+RUN pip install --upgrade pip
+
+#variable de entorno para la carpeta del proyecto
+ENV app /proyecto_citas
+#creo la carpeta del proyecto
+RUN mkdir $app
+# Copia los archivos de la aplicación al contenedor
+WORKDIR $app
+ADD . $app
+# Establece las variables de entorno necesarias
+ENV DJANGO_SETTINGS_MODULE=config.settings.development
+ENV RDS_USERNAME=losDepende
+ENV RDS_PASSWORD=12345
+ENV RDS_DB_NAME=apis-citas
+ENV RDS_HOSTNAME=db_postgres_citas
+ENV RDS_PORT=5432
+ENV PYTHONPATH=proyecto_citas
+ENV PYTHONUSERBASE=/proyecto_citas/vendor
+ENV SIFTSCIENCE_API_KEY=b8dffbb933d4e88a
+ENV APP_ENVIRONMENT=development
+# Instalo dependencias de Python
+RUN pip install -r requirements.txt --user --upgrade
+# Creao las migraciones
+# WORKDIR $app$app
+# RUN python manage.py migrate
+
+EXPOSE 8000
+
+CMD ["python", "/proyecto_citas/proyecto_citas/manage.py", "runserver", "0.0.0.0:8000"]

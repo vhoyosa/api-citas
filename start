@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# add a DNS entry for the IP address of the host machine, if it does not exist
+#grep dockerhost /etc/hosts || /sbin/ip route|awk '/default/ { print $3 " dockerhost" }' >> /etc/hosts
+
+cd /proyecto_citas
+pip install -r requirements.txt --user --upgrade
+
+cd /proyecto_citas/proyecto_citas
+python manage.py migrate
+
+while [ 1 ]; do
+    date
+    sleep 30
+done
