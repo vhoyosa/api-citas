@@ -33,13 +33,9 @@ SECRET_KEY = 'JAJAJAJAJAJAJAJE'
 # when testing, use the default database router, since we use only one database
 DATABASE_ROUTERS = []
 
-RDS_DB_NAME = 'citas'
-if os.environ.get('RDS_DB_NAME'):
-    RDS_DB_NAME = os.environ.get('RDS_DB_NAME')
+RDS_DB_NAME = os.environ.get('RDS_DB_NAME')
 
-RDS_HOSTNAME = 'db'
-if os.environ.get('RDS_HOSTNAME'):
-    RDS_HOSTNAME = os.environ.get('RDS_HOSTNAME')
+RDS_HOSTNAME = os.environ.get('RDS_HOSTNAME')
 
 RDS_PORT = '5432'
 
