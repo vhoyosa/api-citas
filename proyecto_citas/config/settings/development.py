@@ -9,8 +9,8 @@ DEBUG = True
 
 SECRET_KEY = '(k(l)@ht14-%q3l&hp9^(r8+ao+9jpc-y48cfv8i-5tcqzf@lh'
 
-RDS_DB_NAME = 'citas'
-RDS_HOSTNAME = 'db'
+RDS_DB_NAME = os.environ.get('RDS_DB_NAME')
+RDS_HOSTNAME = os.environ.get('RDS_HOSTNAME')
 RDS_PORT = '5432'
 
 DATABASES['default']['NAME'] = RDS_DB_NAME
